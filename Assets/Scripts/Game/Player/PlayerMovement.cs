@@ -26,6 +26,12 @@ namespace TDS.Game.Player
 
         #endregion
 
+        #region Properties
+
+        public PlayerHealth PlayerHealth => _health;
+
+        #endregion
+
         #region Unity lifecycle
 
         private void Start()

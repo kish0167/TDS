@@ -1,6 +1,6 @@
-using TDS.Game;
 using TDS.Game.Player;
 using TDS.Infrastructure.Locator;
+using TDS.Infrastructure.State;
 using UnityEngine;
 
 namespace TDS.Service.Level
@@ -9,6 +9,7 @@ namespace TDS.Service.Level
     {
         #region Variables
 
+        private PlayerHealth _playerHealth;
         private PlayerMovement _playerMovement;
 
         #endregion
@@ -41,6 +42,18 @@ namespace TDS.Service.Level
         private void PlayerCreatedCallback(PlayerMovement playerMovement)
         {
             _playerMovement = playerMovement;
+            _playerHealth = playerMovement.PlayerHealth;
+            _playerHealth.OnDeath += PlayerDeathCallback;
+        }
+
+        private void PlayerDeathCallback()
+        {
+            RestartGame();
+        }
+
+        private void RestartGame()
+        {
+            ServicesLocator.Instance.Get<StateMachine>().Enter<RestartGameState>();
         }
 
         #endregion

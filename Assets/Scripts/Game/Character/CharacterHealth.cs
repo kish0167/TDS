@@ -1,10 +1,9 @@
 using System;
-using TDS.Game.Player;
 using UnityEngine;
 
 namespace TDS.Game.Character
 {
-    public class CharacterHealth: MonoBehaviour, IDamageable
+    public class CharacterHealth : MonoBehaviour, IDamageable
     {
         #region Variables
 
@@ -18,6 +17,7 @@ namespace TDS.Game.Character
 
         #region Events
 
+        public static event Action OnCreated;
         public event Action OnDeath;
 
         #endregion
@@ -35,6 +35,7 @@ namespace TDS.Game.Character
         {
             IsAlive = true;
             Health = _startHealth;
+            OnCreated?.Invoke();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -49,24 +50,12 @@ namespace TDS.Game.Character
         public void TakeDamage(float damage)
         {
             Health = Math.Max(Health - damage, 0f);
-            Debug.Log($"{this.gameObject.name} hp is {Health}");
+            Debug.Log($"{gameObject.name} hp is {Health}");
         }
 
         #endregion
 
         #region Private methods
-
-        private void TryDie()
-        {
-            if (Health > 0)
-            {
-                return;
-            }
-            
-            IsAlive = false;
-            _animation.TriggerDeath();
-            OnDeath?.Invoke();
-        }
 
         private void TakeCollisionEffect(Collider2D other)
         {
@@ -78,6 +67,18 @@ namespace TDS.Game.Character
             TakeDamage(bullet.Damage);
             Destroy(bullet.gameObject);
             TryDie();
+        }
+
+        private void TryDie()
+        {
+            if (Health > 0)
+            {
+                return;
+            }
+
+            IsAlive = false;
+            _animation.TriggerDeath();
+            OnDeath?.Invoke();
         }
 
         #endregion
