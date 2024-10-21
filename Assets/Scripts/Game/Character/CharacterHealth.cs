@@ -50,12 +50,23 @@ namespace TDS.Game.Character
         public void TakeDamage(float damage)
         {
             Health = Math.Max(Health - damage, 0f);
-            Debug.Log($"{gameObject.name} hp is {Health}");
+            LogHp();
+        }
+
+        public void TakeHealing(float healing)
+        {
+            Health += Math.Max(healing, 0f);
+            LogHp();
         }
 
         #endregion
 
         #region Private methods
+
+        private void LogHp()
+        {
+            Debug.Log($"{gameObject.name} hp is {Health}");
+        }
 
         private void TakeCollisionEffect(Collider2D other)
         {

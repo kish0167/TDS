@@ -12,6 +12,8 @@ namespace TDS.Game
 
         void TakeDamage(float damage);
 
+        void TakeHealing(float healing);
+
         #endregion
     }
 }
