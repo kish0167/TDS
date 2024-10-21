@@ -8,7 +8,8 @@ namespace TDS.Game.Enemy
         #region Variables
 
         [Header("Components")]
-        [SerializeField] private PlayerAnimation _animation;
+        [SerializeField] private EnemyAnimation _animation;
+        [SerializeField] private EnemyHealth _health;
 
         [Header("Settings")]
         [SerializeField] private float _shootingPeriod;
@@ -31,18 +32,29 @@ namespace TDS.Game.Enemy
 
         #region Private methods
 
+        private bool CanFire()
+        {
+            return _health.IsAlive && _isShooting;
+        }
+
         private IEnumerator EndlessShooting()
         {
-            while (_isShooting)
+            while (true)
             {
                 yield return new WaitForSeconds(_shootingPeriod);
+
+                if (!CanFire())
+                {
+                    continue;
+                }
+
                 Fire();
             }
         }
 
         private void Fire()
         {
-            //_animation.TriggerAttack();
+            _animation.TriggerAttack();
             Instantiate(_bulletPrefab, _spawnPointTransform.position, _spawnPointTransform.rotation);
         }
 

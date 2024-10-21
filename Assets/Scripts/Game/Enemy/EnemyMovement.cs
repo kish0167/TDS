@@ -8,6 +8,9 @@ namespace TDS.Game.Enemy
     {
         #region Variables
 
+        [Header("Components")]
+        [SerializeField] private EnemyHealth _health;
+
         private Camera _camera;
 
         #endregion
@@ -21,13 +24,21 @@ namespace TDS.Game.Enemy
 
         private void Update()
         {
-            Rotate();
+            if (CanMove())
+            {
+                Rotate();
+            } 
         }
 
         #endregion
 
         #region Private methods
 
+
+        private bool CanMove()
+        {
+            return _health.IsAlive;
+        }
         private void Rotate()
         {
             Vector3 targetPosition = ServicesLocator.Instance.Get<LevelService>().GetPlayerPosition();

@@ -1,4 +1,5 @@
 using TDS.Game;
+using TDS.Game.Player;
 using TDS.Infrastructure.Locator;
 using UnityEngine;
 

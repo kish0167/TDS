@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2487395788552654088}
   - component: {fileID: 935872916897137404}
   - component: {fileID: 1447290682659062578}
+  - component: {fileID: 5267599249202013000}
   - component: {fileID: 6461796132878391155}
   - component: {fileID: 9035211271123431818}
   m_Layer: 8
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 1558884444329984272}
+  _health: {fileID: 5267599249202013000}
   _rb: {fileID: 6461796132878391155}
   _speed: 10
 --- !u!114 &1447290682659062578
@@ -65,8 +67,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 1558884444329984272}
+  _health: {fileID: 5267599249202013000}
   _bulletPrefab: {fileID: 5229359479038434188, guid: 3bebcf795e7154f89b44555e1eaa4725, type: 3}
   _spawnPointTransform: {fileID: 8183580823298757040}
+--- !u!114 &5267599249202013000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4784743242523368968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeaa91a8022e4d34bbe1f9342f2a5021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation: {fileID: 1558884444329984272}
+  _startHealth: 6
 --- !u!50 &6461796132878391155
 Rigidbody2D:
   serializedVersion: 4
@@ -75,7 +92,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4784743242523368968}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -232,8 +249,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1014446371
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4e7af03af8ec849f18845a94a556c633, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

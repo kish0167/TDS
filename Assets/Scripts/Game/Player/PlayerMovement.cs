@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace TDS.Game
+namespace TDS.Game.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
@@ -9,6 +9,7 @@ namespace TDS.Game
 
         [Header("Components")]
         [SerializeField] private PlayerAnimation _animation;
+        [SerializeField] private PlayerHealth _health;
 
         [Header("Settings")]
         [SerializeField] private Rigidbody2D _rb;
@@ -43,8 +44,18 @@ namespace TDS.Game
 
         #region Private methods
 
+        private bool CanMove()
+        {
+            return _health.IsAlive;
+        }
+
         private void Move()
         {
+            if (!CanMove())
+            {
+                return;
+            }
+
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
             Vector2 direction = new(horizontal, vertical);
@@ -55,6 +66,11 @@ namespace TDS.Game
 
         private void Rotate()
         {
+            if (!CanMove())
+            {
+                return;
+            }
+
             Vector3 mousePosition = Input.mousePosition;
             Vector3 mouseWorldPoint = _camera.ScreenToWorldPoint(mousePosition);
             mouseWorldPoint.z = transform.position.z;

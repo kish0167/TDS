@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Chracter
+    uniqueID: 1014446371
+    locked: 0
+  - name: Bullet
+    uniqueID: 2810148551
+    locked: 0
